@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { Player } from "../entities/Player";
 import { COLORS } from "../constants";
+import { eventBus } from "../events";
 
 export class MainScene extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -33,6 +34,8 @@ export class MainScene extends Phaser.Scene {
     this.scale.on(Phaser.Scale.Events.RESIZE, () => {
       this.player.setPosition(this.scale.width / 2, this.scale.height / 2);
     });
+
+    eventBus.emit("scene:ready", { sceneKey: this.scene.key });
   }
 
   update(_: number, dt: number) {
