@@ -61,9 +61,5 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
   },
 
   // Scenes (order matters)
-  scene: [
-    BootScene,
-    PreloadScene,
-    MainScene,
-  ],
+  scene: [BootScene, PreloadScene, MainScene],
 };

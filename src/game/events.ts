@@ -7,5 +7,4 @@ export type GameEvents = {
   "ui:pause": undefined;
 };
 
-
 export const eventBus = new EventBus<GameEvents>();

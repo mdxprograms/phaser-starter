@@ -18,7 +18,7 @@ export default function DebugOverlay() {
   // Simple keyboard toggle: press `
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "`") setOpen(v => !v);
+      if (e.key === "`") setOpen((v) => !v);
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -27,17 +27,17 @@ export default function DebugOverlay() {
 
   // Subscribe to game events
   useEffect(() => {
-    const offScene = eventBus.on("scene:ready", payload => {
-      setState(s => ({ ...s, sceneKey: payload.sceneKey }));
+    const offScene = eventBus.on("scene:ready", (payload) => {
+      setState((s) => ({ ...s, sceneKey: payload.sceneKey }));
     });
 
-    const offMoved = eventBus.on("player:moved", payload => {
-      setState(s => ({ ...s, playerX: payload.x, playerY: payload.y }));
+    const offMoved = eventBus.on("player:moved", (payload) => {
+      setState((s) => ({ ...s, playerX: payload.x, playerY: payload.y }));
     });
 
     // If you emit fps from Phaser, you can listen here too
-    const offFps = eventBus.on("perf:fps", payload => {
-      setState(s => ({ ...s, fps: payload.fps }));
+    const offFps = eventBus.on("perf:fps", (payload) => {
+      setState((s) => ({ ...s, fps: payload.fps }));
     });
 
     return () => {
@@ -87,21 +87,36 @@ export default function DebugOverlay() {
   return (
     <div style={wrapperStyle}>
       <div style={panelStyle}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
+        <div
+          style={{ display: "flex", justifyContent: "space-between", gap: 12 }}
+        >
           <strong>Debug</strong>
           <span style={{ opacity: 0.75 }} title="Press ` to toggle">
             `
           </span>
         </div>
 
-        <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.08)", margin: "8px 0" }} />
+        <hr
+          style={{
+            border: "none",
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+            margin: "8px 0",
+          }}
+        />
 
-        <div><span style={{ opacity: 0.75 }}>Scene:</span> {state.sceneKey}</div>
-        <div><span style={{ opacity: 0.75 }}>FPS:</span> {state.fps.toFixed(0)}</div>
-        <div><span style={{ opacity: 0.75 }}>Player:</span> {px}, {py}</div>
+        <div>
+          <span style={{ opacity: 0.75 }}>Scene:</span> {state.sceneKey}
+        </div>
+        <div>
+          <span style={{ opacity: 0.75 }}>FPS:</span> {state.fps.toFixed(0)}
+        </div>
+        <div>
+          <span style={{ opacity: 0.75 }}>Player:</span> {px}, {py}
+        </div>
 
         <div style={{ marginTop: 8, opacity: 0.75 }}>
-          Tip: emit <code>perf:fps</code> and <code>player:moved</code> from Phaser.
+          Tip: emit <code>perf:fps</code> and <code>player:moved</code> from
+          Phaser.
         </div>
       </div>
     </div>

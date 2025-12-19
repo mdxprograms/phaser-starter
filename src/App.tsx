@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div style={{ height: "100vh", background: "#0b0f1a" }}>
       <div id="phaser-root" />
-			<DebugOverlay />
+      <DebugOverlay />
     </div>
   );
 }

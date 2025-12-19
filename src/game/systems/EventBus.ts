@@ -16,10 +16,7 @@ export class EventBus<Events extends Record<string, unknown>> {
     return () => this.off(event, handler);
   }
 
-  off<K extends keyof Events>(
-    event: K,
-    handler: Handler<Events[K]>
-  ): void {
+  off<K extends keyof Events>(event: K, handler: Handler<Events[K]>): void {
     const set = this.listeners[event];
     if (!set) return;
 
@@ -29,15 +26,12 @@ export class EventBus<Events extends Record<string, unknown>> {
     }
   }
 
-  emit<K extends keyof Events>(
-    event: K,
-    payload: Events[K]
-  ): void {
+  emit<K extends keyof Events>(event: K, payload: Events[K]): void {
     const set = this.listeners[event];
     if (!set) return;
 
     // Copy to allow safe unsubscribe during emit
-    [...set].forEach(handler => handler(payload));
+    [...set].forEach((handler) => handler(payload));
   }
 
   clear<K extends keyof Events>(event?: K): void {

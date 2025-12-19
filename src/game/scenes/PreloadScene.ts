@@ -8,7 +8,7 @@ export class PreloadScene extends Phaser.Scene {
 
   preload() {
     this.createLoadingUI();
-		loadAssets(this);
+    loadAssets(this);
   }
 
   create() {
